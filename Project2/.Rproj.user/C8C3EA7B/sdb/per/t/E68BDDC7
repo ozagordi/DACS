@@ -1,0 +1,16 @@
+{
+    "contents" : "library(tree)\nlibrary(randomForest)\n#library(ggplot2)\nload('samsungData.rda')\n\nmissClass = function(values, prediction){\n  sum((prediction != values) * 1 / length(values))\n}\n\n# reformat names and cure duplicates, activity as factor\nnames(samsungData) <- gsub('[[:punct:]]', \"_\", names(samsungData))\ndyn_vars <- dim(samsungData)[2]-2\nsuff <- paste0(\"_v\", 1:dyn_vars)\nnames(samsungData)[1:dyn_vars] <- paste0(names(samsungData)[1:dyn_vars], suff)\nsamsungData$activity <- as.factor(samsungData$activity)\n\n# split data in train, test and validate sets\ntrainData <- subset(samsungData, subject==1 | subject==3 | subject==5 | subject==6)\ntestData <- subset(samsungData, subject==27 | subject==28 | subject==29 | subject==30)\n\n# decision tree prediction\nlibrary(plyr)\nsamsung_tree <- tree(activity ~ ., data=trainData)\ntree_preds <- predict(samsung_tree, testData)\nactiv_labels <- c(\"laying\", \"sitting\", \"standing\", \"walk\", \"walkdown\", \"walkup\")\nbest_act <- aaply(tree_preds, 1, which.max)\npredicted_activ <- activ_labels[best_act]\nmissClass(predicted_activ, testData$activity)\n\n# random forest prediction\nsamsung_rf <- randomForest(activity ~ ., data=trainData, importance=TRUE,\n                           proximity=TRUE, do.trace=TRUE)\npreds <- predict(rf, testData)\nmissClass(preds, testData$activity)\nMDSplot(rf, trainData$activity)",
+    "created" : 1362693396139.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4130990871",
+    "id" : "E68BDDC7",
+    "lastKnownWriteTime" : 1362956795,
+    "path" : "~/Dropbox/Projects/Coursera/DataAnalysis/Project2/final_analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

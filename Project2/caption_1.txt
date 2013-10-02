@@ -1,0 +1,3 @@
+Figure 1: performance of models with reduced number of predictor variables. The activity performed by the users wearing the smartphone is predicted by a different number of variables and the misclassification rate is computed via
+cross-validation. Already with 9 predictor variables the error rate is less than 1%. Nevertheless, the same number of predictors, used on a non-overlapping
+test set, gives a larger error rate.
