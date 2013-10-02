@@ -1,5 +1,5 @@
-Projects for Data Analysis course by Jeff Leek on Coursera
-----------------------------------------------------------
+Data Analysis on Coursera
+-------------------------
 
 In January 2013 I took the course on Data Analysis offered
 by Jeff Leek on the [Coursera](https://www.coursera.org/course/dataanalysis)
